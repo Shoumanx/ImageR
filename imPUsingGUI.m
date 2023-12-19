@@ -133,8 +133,8 @@ function edge_Callback(hObject, eventdata, handles)
     
     % Display the original image in subplot 1
     subplot(1,2,1);
-    %imshow(a);
-    title('Original Image');
+    imshow(a);
+    title('Grayscale Image');
     
     % Display the edge detected image in subplot 2
     subplot(1,2,2);
@@ -157,7 +157,7 @@ function sobelX_edge_Callback(hObject, eventdata, handles)
     % Display the original image in subplot 1
     subplot(1,2,1);
     imshow(a);
-    title('Original Image');
+    title('Grayscale Image');
     
     % Display the edge detected image in subplot 2
     subplot(1,2,2);
@@ -180,7 +180,7 @@ function sobelY_edge_Callback(hObject, eventdata, handles)
     % Display the original image in subplot 1
     subplot(1,2,1);
     imshow(a);
-    title('Original Image');
+    title('Grayscale Image');
     
     % Display the edge detected image in subplot 2
     subplot(1,2,2);
@@ -252,8 +252,9 @@ a=getappdata(0,'a');
 
 global myValue;
 brightness_value = myValue;
-disp(brightness_value);
-brighter_a=a+brightness_value;
+% disp(brightness_value);
+a = rgb2gray(a);
+brighter_a = a+brightness_value;
 
 % Create a new figure and set its size
 figure('Position', [100 100 1000 500]);
@@ -261,7 +262,7 @@ figure('Position', [100 100 1000 500]);
 % Display the original image in subplot 1
 subplot(1,2,1);
 imshow(a);
-title('Original Image');
+title('Grayscale Image');
 
 % Display the brighter image in subplot 2
 subplot(1,2,2);
@@ -277,7 +278,8 @@ function decrease_brightness_Callback(hObject, eventdata, handles)
 a=getappdata(0,'a');
 global myValue;
 brightness_value = myValue;
-darker_a=a-brightness_value;
+a = rgb2gray(a);
+darker_a = a-brightness_value;
 
 % Create a new figure and set its size
 figure('Position', [100 100 1000 500]);
@@ -285,7 +287,7 @@ figure('Position', [100 100 1000 500]);
 % Display the original image in subplot 1
 subplot(1,2,1);
 imshow(a);
-title('Original Image');
+title('Grayscale Image');
 
 % Display the darker image in subplot 2
 subplot(1,2,2);
@@ -293,23 +295,178 @@ imshow(darker_a);
 title('Darker Image');
 
 
-% --- Executes on slider movement.
-function edit1_Callback(hObject, eventdata, handles)
-% hObject    handle to edit1 (see GCBO)
+
+
+
+% --- Executes on button press in pushbutton13.
+function firstLablacian_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton13 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+    a = getappdata(0,'a');
+    laplacianMatrix = [0 -1 0; -1 4 -1; 0 -1 0];
+    a = rgb2gray(a);
+    aedge = imfilter(a, laplacianMatrix);
+    % Display the result
+    axes(handles.axes1);
+    %imshow(aedge);
+    % Create a new figure and set its size
+    figure('Position', [100 100 1000 500]);
+    
+    % Display the original image in subplot 1
+    subplot(1,2,1);
+    imshow(a);
+    title('Grayscale Image');
+    
+    % Display the edge detected image in subplot 2
+    subplot(1,2,2);
+    imshow(aedge);
+    title('Edge Detected Image (Sobel_Y)');
 
-
-% --- Executes during object creation, after setting all properties.
-function edit1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit1 (see GCBO)
+    
+    
+    % --- Executes on button press in pushbutton13.
+function secondLablacian_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton13 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
+% handles    structure with handles and user data (see GUIDATA)
 
-% Hint: slider controls usually have a light gray background.
-if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor',[.9 .9 .9]);
-end
+    a = getappdata(0,'a');
+    laplacianMatrix = [-1 -1 -1; -1 8 -1; -1 -1 -1];
+    a = rgb2gray(a);
+    aedge = imfilter(a, laplacianMatrix);
+    % Display the result
+    axes(handles.axes1);
+    %imshow(aedge);
+    % Create a new figure and set its size
+    figure('Position', [100 100 1000 500]);
+    
+    % Display the original image in subplot 1
+    subplot(1,2,1);
+    imshow(a);
+    title('Grayscale Image');
+    
+    % Display the edge detected image in subplot 2
+    subplot(1,2,2);
+    imshow(aedge);
+    title('Edge Detected Image (Sobel_Y)');
+
+
+function minFilter_Callback(hObject, eventdata, handles)
+
+    % Get the image data
+    a = getappdata(0,'a');
+    
+    a = rgb2gray(a);
+    min_filter = @(x) min(x(:));
+    a_min = nlfilter(a, [3 3], min_filter);
+    % Display the result
+    axes(handles.axes1);
+    
+    % Create a new figure and set its size
+    figure('Position', [100 100 1000 500]);
+    
+    % Display the original image in subplot 1
+    subplot(1,2,1);
+    imshow(a);
+    title('Grayscale Image');
+    
+    % Display the filtered image in subplot 2
+    subplot(1,2,2);
+    imshow(a_min, []);
+    title('Minimum Filtered Image');
+    
+    
+    
+function maxFilter_Callback(hObject, eventdata, handles)
+    % Get the image data
+    a = getappdata(0,'a');
+    
+    % Convert the image to grayscale if it is not already
+    a = rgb2gray(a);
+    
+    
+    % Define the function for the maximum filter
+    max_filter = @(x) max(x(:));
+    
+    % Apply the maximum filter
+    a_max = nlfilter(a, [3 3], max_filter);
+    
+    % Display the result
+    axes(handles.axes1);
+    
+    % Create a new figure and set its size
+    figure('Position', [100 100 1000 500]);
+    
+    % Display the original image in subplot 1
+    subplot(1,2,1);
+    imshow(a);
+    title('Grayscale Image');
+    
+    % Display the filtered image in subplot 2
+    subplot(1,2,2);
+    imshow(a_max, []);
+    title('Maximum Filtered Image');
+
+    
+function medianFilter_Callback(hObject, eventdata, handles)
+    % Get the image data
+    a = getappdata(0,'a');
+    
+    % Convert the image to grayscale if it is not already
+    a = rgb2gray(a);
+    
+    % Define the neighborhood size for the median filter
+    neighborhood = [3 3];
+    
+    % Apply the median filter
+    a_median = medfilt2(a, neighborhood);
+    
+    % Display the result
+    axes(handles.axes1);
+    
+    % Create a new figure and set its size
+    figure('Position', [100 100 1000 500]);
+    
+    % Display the original image in subplot 1
+    subplot(1,2,1);
+    imshow(a);
+    title('Grayscale Image');
+    
+    % Display the filtered image in subplot 2
+    subplot(1,2,2);
+    imshow(a_median, []);
+    title('Median Filtered Image');
+
+    
+ function averageFilter_Callback(hObject, eventdata, handles)
+    % Get the image data
+    a = getappdata(0,'a');
+    
+    % Convert the image to grayscale if it is not already
+    
+    a = rgb2gray(a);
+    
+    
+    % Define the average filter kernel
+    averageMatrix = [1/9 1/9 1/9; 1/9 1/9 1/9; 1/9 1/9 1/9];
+    
+    % Apply the average filter
+    a_average = imfilter(a, averageMatrix);
+    % Display the result
+    axes(handles.axes1);
+    
+    % Create a new figure and set its size
+    figure('Position', [100 100 1000 500]);
+    
+    % Display the original image in subplot 1
+    subplot(1,2,1);
+    imshow(a);
+    title('Grayscale Image');
+    
+    % Display the filtered image in subplot 2
+    subplot(1,2,2);
+    imshow(a_average, []);
+    title('Average Filtered Image');
+ 
