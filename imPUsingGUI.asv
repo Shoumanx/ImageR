@@ -169,27 +169,25 @@ setappdata(0,'a',a)
 
 % --- Executes on button press in rgb2gray.
 function rgb2gray_Callback(hObject, eventdata, handles)
-    % hObject    handle to rgb2gray (see GCBO)
-    % eventdata  reserved - to be defined in a future version of MATLAB
-    % handles    structure with handles and user data (see GUIDATA)
-    a=getappdata(0,'a');
-    agray=rgb2gray(a);
-    imshow(agray);
-    
-    %{
-        % Create a new figure and set its size
-        figure('Position', [100 100 1000 500]);
+% hObject    handle to rgb2gray (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+a=getappdata(0,'a');
+agray=rgb2gray(a);
 
-        % Display the original image in subplot 1
-        subplot(1,2,1);
-        imshow(a);
-        title('Original Image');
+% Create a new figure and set its size
+figure('Position', [100 100 1000 500]);
 
-        % Display the grayscale image in subplot 2
-        subplot(1,2,2);
-        imshow(agray);
-        title('Grayscale Image');
-    %}
+% Display the original image in subplot 1
+subplot(1,2,1);
+imshow(a);
+title('Original Image');
+
+% Display the grayscale image in subplot 2
+subplot(1,2,2);
+imshow(agray);
+title('Grayscale Image');
+
 function reset_Callback(hObject, eventdata, handles)
 
 a=getappdata(0,'a');
@@ -322,22 +320,20 @@ function minFilter_Callback(hObject, eventdata, handles)
     a_min = nlfilter(a, [3 3], min_filter);
     % Display the result
     axes(handles.axes1);
-    imshow(a_min);
     
-    %{
-        % Create a new figure and set its size
-        figure('Position', [100 100 1000 500]);
-
-        % Display the original image in subplot 1
-        subplot(1,2,1);
-        imshow(a);
-        title('Grayscale Image');
-
-        % Display the filtered image in subplot 2
-        subplot(1,2,2);
-        imshow(a_min, []);
-        title('Minimum Filtered Image');
-    %}
+    % Create a new figure and set its size
+    figure('Position', [100 100 1000 500]);
+    
+    % Display the original image in subplot 1
+    subplot(1,2,1);
+    imshow(a);
+    title('Grayscale Image');
+    
+    % Display the filtered image in subplot 2
+    subplot(1,2,2);
+    imshow(a_min, []);
+    title('Minimum Filtered Image');
+    
     
     
 function maxFilter_Callback(hObject, eventdata, handles)
@@ -356,22 +352,19 @@ function maxFilter_Callback(hObject, eventdata, handles)
     
     % Display the result
     axes(handles.axes1);
-    imshow(a_max);
     
-    %{
-        % Create a new figure and set its size
-        figure('Position', [100 100 1000 500]);
-
-        % Display the original image in subplot 1
-        subplot(1,2,1);
-        imshow(a);
-        title('Grayscale Image');
-
-        % Display the filtered image in subplot 2
-        subplot(1,2,2);
-        imshow(a_max, []);
-        title('Maximum Filtered Image');
-    %}
+    % Create a new figure and set its size
+    figure('Position', [100 100 1000 500]);
+    
+    % Display the original image in subplot 1
+    subplot(1,2,1);
+    imshow(a);
+    title('Grayscale Image');
+    
+    % Display the filtered image in subplot 2
+    subplot(1,2,2);
+    imshow(a_max, []);
+    title('Maximum Filtered Image');
 
     
 function medianFilter_Callback(hObject, eventdata, handles)
@@ -389,22 +382,19 @@ function medianFilter_Callback(hObject, eventdata, handles)
     
     % Display the result
     axes(handles.axes1);
-    imshow(a_median);
     
-    %{
-        % Create a new figure and set its size
-        figure('Position', [100 100 1000 500]);
-
-        % Display the original image in subplot 1
-        subplot(1,2,1);
-        imshow(a);
-        title('Grayscale Image');
-
-        % Display the filtered image in subplot 2
-        subplot(1,2,2);
-        imshow(a_median, []);
-        title('Median Filtered Image');
-    %}
+    % Create a new figure and set its size
+    figure('Position', [100 100 1000 500]);
+    
+    % Display the original image in subplot 1
+    subplot(1,2,1);
+    imshow(a);
+    title('Grayscale Image');
+    
+    % Display the filtered image in subplot 2
+    subplot(1,2,2);
+    imshow(a_median, []);
+    title('Median Filtered Image');
 
     
  function averageFilter_Callback(hObject, eventdata, handles)
@@ -423,19 +413,17 @@ function medianFilter_Callback(hObject, eventdata, handles)
     a_average = imfilter(a, averageMatrix);
     % Display the result
     axes(handles.axes1);
-    imshow(a_average);
     
-    %{
-        % Create a new figure and set its size
-        figure('Position', [100 100 1000 500]);
-
-        % Display the original image in subplot 1
-        subplot(1,2,1);
-        imshow(a);
-        title('Grayscale Image');
-
-        % Display the filtered image in subplot 2
-        subplot(1,2,2);
-        imshow(a_average, []);
-        title('Average Filtered Image');
-    %}
+    % Create a new figure and set its size
+    figure('Position', [100 100 1000 500]);
+    
+    % Display the original image in subplot 1
+    subplot(1,2,1);
+    imshow(a);
+    title('Grayscale Image');
+    
+    % Display the filtered image in subplot 2
+    subplot(1,2,2);
+    imshow(a_average, []);
+    title('Average Filtered Image');
+ 
