@@ -228,37 +228,35 @@ function increase_brightness_Callback(hObject, eventdata, handles)
 
 % --- Executes on button press in decrease_brightness.
 function decrease_brightness_Callback(hObject, eventdata, handles)
-% hObject    handle to decrease_brightness (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-a=getappdata(0,'a');
-global myValue;
-brightness_value = myValue;
-a = rgb2gray(a);
-darker_a = a - brightness_value;
+    % hObject    handle to decrease_brightness (see GCBO)
+    % eventdata  reserved - to be defined in a future version of MATLAB
+    % handles    structure with handles and user data (see GUIDATA)
+    a=getappdata(0,'a');
+    global myValue;
+    brightness_value = myValue;
+    a = rgb2gray(a);
+    darker_a = a - brightness_value;
 
-% Create a new figure and set its size
-figure('Position', [100 100 1000 500]);
+    % Create a new figure and set its size
+    figure('Position', [100 100 1000 500]);
 
-% Display the original image in subplot 1
-subplot(1,2,1);
-imshow(a);
-title('Grayscale Image');
+    % Display the original image in subplot 1
+    subplot(1,2,1);
+    imshow(a);
+    title('Grayscale Image');
 
-% Display the darker image in subplot 2
-subplot(1,2,2);
-imshow(darker_a);
-title('Darker Image');
-
-
+    % Display the darker image in subplot 2
+    subplot(1,2,2);
+    imshow(darker_a);
+    title('Darker Image');
 
 
 
 % --- Executes on button press in pushbutton13.
 function simpleLablacian_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton13 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+    % hObject    handle to pushbutton13 (see GCBO)
+    % eventdata  reserved - to be defined in a future version of MATLAB
+    % handles    structure with handles and user data (see GUIDATA)
 
     a = getappdata(0,'a');
     laplacianMatrix = [0 -1 0; -1 5 -1; 0 -1 0];
@@ -286,9 +284,9 @@ function simpleLablacian_Callback(hObject, eventdata, handles)
     
     % --- Executes on button press in pushbutton13.
 function variantLablacian_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton13 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+    % hObject    handle to pushbutton13 (see GCBO)
+    % eventdata  reserved - to be defined in a future version of MATLAB
+    % handles    structure with handles and user data (see GUIDATA)
 
     a = getappdata(0,'a');
     laplacianMatrix = [-1 -1 -1; -1 9 -1; -1 -1 -1];
